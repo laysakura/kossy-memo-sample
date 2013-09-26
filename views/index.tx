@@ -3,10 +3,10 @@
 <h1><: $greeting :> <: $c.stash.site_name :>kossy-memo-sample</h1>
 <p>保存できるメモ帳です．次回アクセス時にあなたのメモが見られるとは限りません :P</p>
 
-<form>
-    <textarea id="memo-area"></textarea>
-    <button id="save-btn" class="btn btn-primary">保存</button>
-    <p>最終更新: <: $last_update :></p>
+<form action="/" method="post">
+  <textarea id="memo-area"></textarea>
+  <input type="submit" name="submit" value="保存" />
 </form>
 
+<p>最終更新: <: $last_update :></p>
 : }
