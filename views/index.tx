@@ -1,6 +1,12 @@
 : cascade base
 : around content -> {
-<h1><: $greeting :> <: $c.stash.site_name :></h1>
-<p>Use this document as a way to quick start any new project.<br> All you get is this message and a barebones HTML document.</p>
-: }
+<h1><: $greeting :> <: $c.stash.site_name :>kossy-memo-sample</h1>
+<p>保存できるメモ帳です．次回アクセス時にあなたのメモが見られるとは限りません :P</p>
 
+<form>
+    <textarea id="memo-area"></textarea>
+    <button id="save-btn" class="btn btn-primary">保存</button>
+    <p>最終更新: <: $last_update :></p>
+</form>
+
+: }

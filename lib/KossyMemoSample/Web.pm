@@ -5,18 +5,18 @@ use warnings;
 use utf8;
 use Kossy;
 
-filter 'set_title' => sub {
+filter 'set_prev_memo' => sub {
     my $app = shift;
-    sub {
-        my ( $self, $c )  = @_;
-        $c->stash->{site_name} = __PACKAGE__;
-        $app->($self,$c);
-    }
+    # sub {
+    #     my ( $self, $c )  = @_;
+    #     $c->stash->{site_name} = __PACKAGE__;
+    #     $app->($self,$c);
+    # }
 };
 
-get '/' => [qw/set_title/] => sub {
+get '/' => [qw/set_prev_memo/] => sub {
     my ( $self, $c )  = @_;
-    $c->render('index.tx', { greeting => "Hello" });
+    $c->render('index.tx', { last_update => "Hello" });
 };
 
 get '/json' => sub {
