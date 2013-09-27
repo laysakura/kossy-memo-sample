@@ -1,0 +1,12 @@
+* kossy-memo-sample
+  ブラウザで動くメモ帳です．
+  最後に更新した人のメモが閲覧できます．
+
+** 使い方
+   #+BEGIN_SRC sh
+$ carton install
+$ vi lib/KossyMemoSample/Config.pm  # MySQL接続パラメータを設定
+$ # mysql 起動
+$ carton exec -- plackup -r -E production app.psgi
+$ firefox localhost:5000
+   #+END_SRC
