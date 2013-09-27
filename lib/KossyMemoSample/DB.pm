@@ -5,7 +5,6 @@ use warnings;
 use utf8;
 use DBI;
 use KossyMemoSample::Config;
-use Data::Dumper;
 
 sub _get_dbh {
     my $dbh = DBI->connect(
