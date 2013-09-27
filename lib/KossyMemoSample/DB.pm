@@ -37,7 +37,7 @@ sub _update1 {
     my $table = config->param('table');
 
     my $sth = $dbh->prepare("replace into $table values (1, ?, now());");
-    $sth->execute($dbh->quote($content)) or die 'cannot replace the row';;
+    $sth->execute($content) or die 'cannot replace the row';;
     $sth->finish;
 
     $dbh->disconnect;

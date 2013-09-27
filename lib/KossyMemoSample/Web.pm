@@ -28,7 +28,7 @@ post '/' => sub {
         }]);
     eval {
         KossyMemoSample::DB::save_memo($form->valid('memo-area'));
-        $c->res->status(200);
+        $c->redirect('/');
     };
     if ($@) {
         print $@;
