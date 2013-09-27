@@ -2,9 +2,10 @@ package KossyMemoSample::DB;
 
 use strict;
 use warnings;
-# use utf8;
+use utf8;
 use DBI;
 use KossyMemoSample::Config;
+use Data::Dumper;
 
 sub _get_dbh {
     my $dbh = DBI->connect(
@@ -35,8 +36,11 @@ sub _update1 {
     my $dbh = _get_dbh();
     my $table = config->param('table');
 
-    my $stmt = $dbh->prepare("replace into $table values (1, ?, now());");
-    $stmt->execute($dbh->quote($content)) or die 'cannot replace the row';;
+    my $sth = $dbh->prepare("replace into $table values (1, ?, now());");
+    $sth->execute($dbh->quote($content)) or die 'cannot replace the row';;
+    $sth->finish;
+
+    $dbh->disconnect;
 };
 
 sub save_memo {
@@ -46,12 +50,26 @@ sub save_memo {
 };
 
 sub read_memo {
-    # my $table = config->param('table');
-    # my @rows = $dbh->selectall_arrayref("select * from $table");
-    # $#rows == 1 or die "";
-    return {
-        content => "hogehoge",
-        last_update => "last cristmas",
+    my $dbh = _get_dbh();
+    my $table = config->param('table');
+
+    my $sth = $dbh->prepare("select * from $table");
+    $sth->execute();
+    my @rec = $sth->fetchrow_array;
+    $sth->finish;
+    $dbh->disconnect;
+
+    if (@rec) {
+        return {
+            content => $rec[1],
+            last_update => $rec[2],
+        };
+    }
+    else {
+        return {
+            content => "",
+            last_update => "",
+        };
     }
 };
 
